@@ -2,15 +2,15 @@
 ---
 
 <section class="min-h-screen flex items-center relative overflow-hidden pt-20 pb-16 noise-bg">
-  <!-- Decorative shapes (behind content, hidden on mobile to avoid overlap) -->
-  <div class="hidden md:block absolute top-24 right-[10%] w-40 h-40 border-[3px] border-charcoal rounded-full opacity-20 animate-blob z-0"></div>
-  <div class="hidden md:block absolute bottom-32 left-[5%] w-28 h-28 bg-coral/20 rounded-2xl rotate-12 animate-wiggle z-0"></div>
-  <div class="absolute top-1/4 left-[3%] w-12 h-12 md:w-16 md:h-16 bg-electriclight/40 rounded-lg -rotate-12 z-0"></div>
-  <div class="hidden md:block absolute bottom-20 right-[15%] w-20 h-20 border-2 border-hotpink rounded-full opacity-30 z-0"></div>
+  <!-- Decorative shapes (behind content) -->
+  <div class="hidden md:block absolute top-24 right-[10%] w-40 h-40 border-[3px] border-charcoal rounded-full opacity-20 animate-blob" style="z-index:1"></div>
+  <div class="hidden md:block absolute bottom-32 left-[5%] w-28 h-28 bg-coral/20 rounded-2xl rotate-12 animate-wiggle" style="z-index:1"></div>
+  <div class="absolute top-1/4 left-[3%] w-12 h-12 md:w-16 md:h-16 bg-electriclight/40 rounded-lg -rotate-12" style="z-index:1"></div>
+  <div class="hidden md:block absolute bottom-20 right-[15%] w-20 h-20 border-2 border-hotpink rounded-full opacity-30" style="z-index:1"></div>
   <!-- Dot grid overlay -->
-  <div class="absolute inset-0 dots-bg opacity-40 pointer-events-none z-0"></div>
+  <div class="absolute inset-0 dots-bg opacity-40 pointer-events-none" style="z-index:0"></div>
 
-  <div class="section-container relative z-10 w-full">
+  <div class="section-container relative w-full" style="z-index:2">
     <div class="max-w-4xl">
       <!-- Eyebrow -->
       <div class="reveal inline-flex items-center gap-2 mb-6">
@@ -60,7 +60,7 @@
   </div>
 
   <!-- Scroll indicator (only on desktop, hidden on mobile to avoid overlap) -->
-  <div class="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 z-10">
+  <div class="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2" style="z-index:2">
     <span class="text-[10px] font-display font-bold text-gray uppercase tracking-[0.2em]">Scroll</span>
     <div class="w-5 h-8 border-2 border-charcoal rounded-full flex justify-center pt-1.5">
       <div class="w-1 h-2 bg-charcoal rounded-full animate-bounce"></div>
