@@ -5,7 +5,7 @@ const posts = await getCollection('blog', ({ data }) => data.date <= new Date())
 posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<section id="blog" class="bg-paper relative noise-bg">
+<section id="blog" class="bg-warmwhite relative zigzag-bg">
   <div class="section-container relative z-10">
     <div class="mb-16">
       <span class="tag-pill bg-mint mb-4 inline-flex" data-i18n="blog.label">04 — BLOG</span>

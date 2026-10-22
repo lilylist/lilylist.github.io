@@ -23,6 +23,11 @@ window.translations = {
     'gallery.empty': 'Photos will appear here in a polaroid-style wall. Upload via the CMS!',
     'contact.label': '07 — CONTACT', 'contact.title': 'Get in Touch', 'contact.subtitle': "Have a question, collaboration idea, or just want to say hi?",
     'contact.github': 'GitHub', 'contact.email': 'Email',
+    'quote.text': 'Code is poetry written in logic. Every bug is a story, every feature a new chapter.',
+    'quote.author': "— lilylist's developer manifesto",
+    'now.label': "What I'm Doing Now", 'now.title': 'Current obsessions',
+    'now.updated': 'Last updated: October 2026',
+    'footer.tagline': 'Building things with code, writing about the journey, and sharing what I learn.',
     'footer.built_with': 'Built with', 'footer.and': '&',
     'lang.toggle': '中文'
   },
@@ -50,6 +55,11 @@ window.translations = {
     'gallery.empty': '通过 CMS 上传照片后，它们会以拍立得风格展示在这里！',
     'contact.label': '07 — 联系', 'contact.title': '联系我', 'contact.subtitle': '有问题、合作想法，或者只是想打个招呼？',
     'contact.github': 'GitHub', 'contact.email': '邮箱',
+    'quote.text': '代码是用逻辑写成的诗。每个 bug 都是一个故事，每个功能都是新的篇章。',
+    'quote.author': '— lilylist 的开发者宣言',
+    'now.label': '现在在做什么', 'now.title': '当前的沉迷',
+    'now.updated': '最后更新：2026年10月',
+    'footer.tagline': '用代码构建东西，记录学习旅程，分享一路上的所见所得。',
     'footer.built_with': '使用', 'footer.and': '和',
     'lang.toggle': 'EN'
   }
