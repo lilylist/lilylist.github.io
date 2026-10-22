@@ -1,0 +1,30 @@
+---
+---
+
+<div id="toast-container" class="fixed top-20 right-6 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+
+<script>
+  window.showToast = function(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    const colors = {
+      success: 'bg-green-50 border-green-200 text-green-800',
+      error: 'bg-red-50 border-red-200 text-red-800',
+      info: 'bg-blue-50 border-blue-200 text-blue-800'
+    };
+
+    const icons = { success: '✓', error: '✕', info: 'ℹ' };
+
+    const toast = document.createElement('div');
+    toast.className = `${colors[type] || colors.info} border backdrop-blur-md rounded-xl px-5 py-3 shadow-lg flex items-center gap-3 transform translate-x-full opacity-0 transition-all duration-300 pointer-events-auto min-w-[200px]`;
+    toast.innerHTML = `<span class="text-lg">${icons[type] || icons.info}</span><span class="text-sm font-medium">${message}</span>`;
+
+    container.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.remove('translate-x-full', 'opacity-0'));
+    setTimeout(() => {
+      toast.classList.add('translate-x-full', 'opacity-0');
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  };
+</script>

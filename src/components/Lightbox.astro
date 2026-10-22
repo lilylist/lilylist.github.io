@@ -1,0 +1,88 @@
+---
+---
+
+<div id="lightbox" class="fixed inset-0 z-[90] bg-black/90 backdrop-blur-md flex items-center justify-center p-6 opacity-0 pointer-events-none transition-all duration-300">
+  <button id="lightbox-close" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+  <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+    </svg>
+  </button>
+  <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+    </svg>
+  </button>
+  <div id="lightbox-content" class="max-w-4xl max-h-[85vh] transform scale-90 opacity-0 transition-all duration-300 text-center">
+    <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[75vh] rounded-xl shadow-2xl object-contain mx-auto" />
+    <p id="lightbox-caption" class="text-white/80 mt-4 text-sm"></p>
+  </div>
+</div>
+
+<script>
+  let lightboxItems = [];
+  let currentIndex = 0;
+
+  const lightbox = document.getElementById('lightbox');
+  const lbContent = document.getElementById('lightbox-content');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbCaption = document.getElementById('lightbox-caption');
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightbox();
+    lightbox.classList.remove('opacity-0', 'pointer-events-none');
+    lightbox.classList.add('opacity-100');
+    lbContent.classList.remove('scale-90', 'opacity-0');
+    lbContent.classList.add('scale-100', 'opacity-100');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function updateLightbox() {
+    const item = lightboxItems[currentIndex];
+    if (!item) return;
+    lbImg.src = item.src;
+    lbImg.alt = item.alt || '';
+    lbCaption.textContent = item.caption || '';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.add('opacity-0', 'pointer-events-none');
+    lightbox.classList.remove('opacity-100');
+    lbContent.classList.add('scale-90', 'opacity-0');
+    lbContent.classList.remove('scale-100', 'opacity-100');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+  document.getElementById('lightbox-prev')?.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + lightboxItems.length) % lightboxItems.length;
+    updateLightbox();
+  });
+  document.getElementById('lightbox-next')?.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % lightboxItems.length;
+    updateLightbox();
+  });
+  lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + lightboxItems.length) % lightboxItems.length; updateLightbox(); }
+    if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % lightboxItems.length; updateLightbox(); }
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const galleryImgs = document.querySelectorAll('[data-gallery-img]');
+    galleryImgs.forEach((img, i) => {
+      lightboxItems.push({
+        src: img.src,
+        alt: img.alt,
+        caption: img.dataset.caption || ''
+      });
+      img.closest('[data-gallery-item]')?.addEventListener('click', () => openLightbox(i));
+    });
+  });
+</script>
