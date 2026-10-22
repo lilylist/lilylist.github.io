@@ -1,0 +1,22 @@
+---
+const items = [
+  '✦ CREATIVE DEVELOPER',
+  '◆ UI/UX PASSION',
+  '✦ OPEN SOURCE',
+  '◆ LIFELONG LEARNER',
+  '✦ PROBLEM SOLVER',
+  '◆ CODE & DESIGN',
+  '✦ BUILD THINGS',
+  '◆ SHARE KNOWLEDGE'
+];
+---
+
+<div class="bg-charcoal text-white py-4 overflow-hidden border-y-0">
+  <div class="marquee-track">
+    {[...items, ...items].map((item, i) => (
+      <span key={i} class="font-display font-bold text-sm md:text-base uppercase tracking-wider whitespace-nowrap">
+        {item}
+      </span>
+    ))}
+  </div>
+</div>

@@ -4,41 +4,47 @@ import { getCollection } from 'astro:content';
 const events = await getCollection('timeline');
 events.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-const typeColors = {
-  work: 'bg-blue-100 text-blue-700',
-  education: 'bg-green-100 text-green-700',
-  project: 'bg-purple-100 text-purple-700',
-  milestone: 'bg-pink-100 text-pink-700'
+const typeStyles = {
+  work: 'bg-electric text-white border-electric',
+  education: 'bg-mint text-deep border-mint',
+  project: 'bg-hotpink text-white border-hotpink',
+  milestone: 'bg-golden text-charcoal border-golden'
 };
 ---
 
-<section id="timeline">
+<section id="timeline" class="relative">
   <div class="section-container">
-    <div class="text-center mb-16">
+    <div class="mb-16">
+      <span class="tag-pill bg-golden text-charcoal mb-4 inline-flex" data-i18n="timeline.label">05 — TIMELINE</span>
       <h2 class="section-title reveal" data-i18n="timeline.title">Timeline</h2>
       <p class="section-subtitle reveal reveal-delay-1" data-i18n="timeline.subtitle">My journey so far</p>
     </div>
 
     {events.length > 0 ? (
       <div class="relative">
-        <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-deeppurple via-purple-300 to-pink-300 md:-translate-x-0.5"></div>
+        <!-- Vertical line -->
+        <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-[3px] bg-charcoal md:-translate-x-1.5"></div>
+
         <div class="space-y-8">
           {events.map((event, i) => (
-            <div class={`reveal reveal-delay-${(i % 4) + 1} relative flex items-center ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-              <div class="absolute left-4 md:left-1/2 w-4 h-4 bg-deeppurple rounded-full border-4 border-cream md:-translate-x-2"></div>
-              <div class={`ml-12 md:ml-0 md:w-[calc(50%-2rem)] ${i % 2 === 0 ? 'md:pr-8 md:text-right' : 'md:pl-8'}`}>
-                <div class="glass-card p-5">
-                  <div class={`flex items-center gap-2 mb-2 flex-wrap ${i % 2 === 0 ? 'md:justify-end' : ''}`}>
-                    <span class="text-lg">{event.data.icon}</span>
-                    <span class={`px-2 py-0.5 rounded text-xs font-medium ${typeColors[event.data.type] || 'bg-gray-100 text-gray-700'}`}>
+            <div class={`reveal reveal-delay-${(i % 4) + 1} relative flex items-start ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+              <!-- Dot on line -->
+              <div class="absolute left-6 md:left-1/2 w-4 h-4 bg-charcoal rounded-full border-[3px] border-cream md:-translate-x-2 mt-6"></div>
+
+              <!-- Card -->
+              <div class={`ml-14 md:ml-0 md:w-[calc(50%-3rem)] ${i % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
+                <div class="bold-card p-6">
+                  <div class="flex items-center gap-2 mb-3 flex-wrap">
+                    <span className="text-xl">{event.data.icon}</span>
+                    <span class={`px-2 py-0.5 rounded-full text-[10px] font-display font-bold uppercase tracking-wider border-2 ${typeStyles[event.data.type] || 'bg-lightgray/20 text-gray border-lightgray'}`}>
                       {event.data.type}
                     </span>
                   </div>
-                  <h3 class="font-display font-semibold text-stone-900">{event.data.title}</h3>
-                  <time class="text-xs text-warmgray">
-                    {event.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+                  <h3 class="font-display text-lg font-black text-charcoal mb-1">{event.data.title}</h3>
+                  <time class="text-xs font-mono font-bold text-gray block mb-2">
+                    {event.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
                   </time>
-                  <p class="text-sm text-warmgray mt-2">{event.data.description}</p>
+                  <p class="text-sm text-stone leading-relaxed">{event.data.description}</p>
                 </div>
               </div>
             </div>
@@ -46,10 +52,10 @@ const typeColors = {
         </div>
       </div>
     ) : (
-      <div class="text-center py-16">
-        <div class="glass-card p-12 max-w-md mx-auto">
-          <div class="text-5xl mb-4">📅</div>
-          <p class="text-warmgray" data-i18n="timeline.empty">Add your milestones via the CMS to see them here!</p>
+      <div class="text-center py-20">
+        <div class="bold-card p-12 max-w-md mx-auto">
+          <div class="text-6xl mb-4">📅</div>
+          <p class="text-gray font-display font-semibold" data-i18n="timeline.empty">Add your milestones via the CMS to see them here!</p>
         </div>
       </div>
     )}

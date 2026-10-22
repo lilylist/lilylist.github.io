@@ -9,6 +9,7 @@ const {
   description = 'Personal website of lilylist — projects, blog, and creative work.'
 } = Astro.props;
 ---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,9 +32,9 @@ const {
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal, .stagger').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>

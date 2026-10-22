@@ -8,17 +8,17 @@
     const container = document.getElementById('toast-container');
     if (!container) return;
 
-    const colors = {
-      success: 'bg-green-50 border-green-200 text-green-800',
-      error: 'bg-red-50 border-red-200 text-red-800',
-      info: 'bg-blue-50 border-blue-200 text-blue-800'
+    const styles = {
+      success: 'bg-mint text-deep',
+      error: 'bg-coral text-white',
+      info: 'bg-electric text-white'
     };
 
-    const icons = { success: '✓', error: '✕', info: 'ℹ' };
+    const icons = { success: '✓', error: '✕', info: '→' };
 
     const toast = document.createElement('div');
-    toast.className = `${colors[type] || colors.info} border backdrop-blur-md rounded-xl px-5 py-3 shadow-lg flex items-center gap-3 transform translate-x-full opacity-0 transition-all duration-300 pointer-events-auto min-w-[200px]`;
-    toast.innerHTML = `<span class="text-lg">${icons[type] || icons.info}</span><span class="text-sm font-medium">${message}</span>`;
+    toast.className = `${styles[type] || styles.info} border-[3px] border-charcoal shadow-[4px_4px_0px_#1A1A1A] rounded-xl px-5 py-3 flex items-center gap-3 transform translate-x-full opacity-0 transition-all duration-300 pointer-events-auto min-w-[220px]`;
+    toast.innerHTML = `<span class="text-lg font-display font-black">${icons[type] || icons.info}</span><span class="text-sm font-display font-bold">${message}</span>`;
 
     container.appendChild(toast);
     requestAnimationFrame(() => toast.classList.remove('translate-x-full', 'opacity-0'));
