@@ -29,13 +29,13 @@ const typeStyles = {
           {events.map((event, i) => (
             <div class={`reveal reveal-delay-${(i % 4) + 1} relative flex items-start ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
               <!-- Dot on line -->
-              <div class="absolute left-6 md:left-1/2 w-4 h-4 bg-charcoal rounded-full border-[3px] border-cream md:-translate-x-2 mt-6"></div>
+              <div class="absolute left-6 md:left-1/2 w-4 h-4 bg-charcoal rounded-full border-[3px] border-cream -translate-x-2 md:-translate-x-2 mt-6 z-10"></div>
 
               <!-- Card -->
               <div class={`ml-14 md:ml-0 md:w-[calc(50%-3rem)] ${i % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
                 <div class="bold-card p-6">
                   <div class="flex items-center gap-2 mb-3 flex-wrap">
-                    <span className="text-xl">{event.data.icon}</span>
+                    <span class="text-xl">{event.data.icon}</span>
                     <span class={`px-2 py-0.5 rounded-full text-[10px] font-display font-bold uppercase tracking-wider border-2 ${typeStyles[event.data.type] || 'bg-lightgray/20 text-gray border-lightgray'}`}>
                       {event.data.type}
                     </span>

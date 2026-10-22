@@ -6,20 +6,17 @@ const projects = await getCollection('projects');
 
 <section id="projects" class="bg-paper relative noise-bg">
   <div class="section-container relative z-10">
-    <div class="flex items-end justify-between mb-16 flex-wrap gap-4">
-      <div>
-        <span class="tag-pill bg-electric mb-4 inline-flex" data-i18n="projects.label">02 — WORK</span>
-        <h2 class="section-title reveal" data-i18n="projects.title">Projects</h2>
-        <p class="section-subtitle reveal reveal-delay-1" data-i18n="projects.subtitle">Things I've built and contributed to</p>
-      </div>
+    <div class="mb-16">
+      <span class="tag-pill bg-electric mb-4 inline-flex" data-i18n="projects.label">02 — WORK</span>
+      <h2 class="section-title reveal" data-i18n="projects.title">Projects</h2>
+      <p class="section-subtitle reveal reveal-delay-1" data-i18n="projects.subtitle">Things I've built and contributed to</p>
     </div>
 
     {projects.length > 0 ? (
-      <div class="grid md:grid-cols-2 gap-6 stagger">
+      <div class="grid md:grid-cols-2 gap-6">
         {projects.map((project, i) => (
           <article
-            class={`bold-card overflow-hidden group cursor-pointer hover:-translate-y-1 transition-all duration-300`}
-            style={i % 3 === 0 ? '' : i % 3 === 1 ? 'margin-top: 2rem' : ''}
+            class={`reveal reveal-delay-${(i % 4) + 1} bold-card overflow-hidden group cursor-pointer hover:-translate-y-1 transition-all duration-300`}
             onclick={`openModal(\`
               <div class='p-8 md:p-10'>
                 ${project.data.cover ? `<div class='rounded-xl overflow-hidden mb-6 border-2 border-charcoal'><img src='${project.data.cover}' alt='${project.data.title}' class='w-full aspect-video object-cover' /></div>` : ''}

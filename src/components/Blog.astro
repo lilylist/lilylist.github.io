@@ -14,9 +14,9 @@ posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
     </div>
 
     {posts.length > 0 ? (
-      <div class="grid md:grid-cols-2 gap-6 stagger">
+      <div class="grid md:grid-cols-2 gap-6">
         {posts.slice(0, 6).map((post, i) => (
-          <article class={`bold-card p-6 group hover:-translate-y-1 transition-all duration-300 ${i % 3 === 0 ? '' : i % 3 === 1 ? 'bold-card-coral' : 'bold-card-pink'}`}>
+          <article class={`reveal reveal-delay-${(i % 4) + 1} bold-card p-6 group hover:-translate-y-1 transition-all duration-300 ${i % 3 === 0 ? '' : i % 3 === 1 ? 'bold-card-coral' : 'bold-card-pink'}`}>
             {post.data.cover && (
               <div class="aspect-[16/9] rounded-xl overflow-hidden mb-4 border-2 border-charcoal">
                 <img src={post.data.cover} alt={post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />

@@ -13,6 +13,11 @@
     @apply bg-cream text-charcoal font-sans antialiased;
   }
 
+  /* Prevent fixed nav from hiding section anchors */
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+
   ::selection {
     @apply bg-electric text-white;
   }
@@ -147,14 +152,17 @@
   .reveal-delay-3 { transition-delay: 0.3s; }
   .reveal-delay-4 { transition-delay: 0.4s; }
 
-  /* Stagger children */
+  /* Stagger children — base hidden state */
   .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  /* First 6 get escalating delays */
   .stagger.visible > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.05s; }
   .stagger.visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
   .stagger.visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
   .stagger.visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
   .stagger.visible > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 0.25s; }
   .stagger.visible > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+  /* 7th+ children: no delay so they don't stay invisible forever */
+  .stagger.visible > *:nth-child(n+7) { opacity: 1; transform: translateY(0); transition-delay: 0.35s; }
 
   /* Decorative shape */
   .deco-circle {

@@ -15,9 +15,9 @@ const bgColors = ['bg-warmwhite', 'bg-corals', 'bg-electriclight', 'bg-pinklight
     </div>
 
     {photos.length > 0 ? (
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 stagger">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {photos.map((photo, i) => (
-          <div class="group cursor-pointer" data-gallery-item>
+          <div class={`reveal reveal-delay-${(i % 4) + 1} group cursor-pointer`} data-gallery-item>
             <div class={`${bgColors[i % bgColors.length]} p-3 pb-8 rounded-sm border-2 border-charcoal shadow-[4px_4px_0px_#1A1A1A] hover:shadow-[8px_8px_0px_#6C5CE7] transition-all duration-300 hover:-translate-y-2 hover:rotate-0`} style={`transform: rotate(${rotations[i % rotations.length]}deg)`}>
               <div class="aspect-square overflow-hidden rounded-sm relative">
                 <img src={photo.data.photo} alt={photo.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" data-gallery-img data-caption={photo.data.caption || photo.data.title} />

@@ -2,22 +2,22 @@
 const skillCategories = [
   {
     title: 'Languages', i18nKey: 'skills.cat1', icon: '💻',
-    color: 'bg-electriclight text-electric',
+    color: 'bg-electriclight text-electric border-electric',
     skills: ['JavaScript', 'TypeScript', 'Python', 'Java', 'Go', 'SQL']
   },
   {
     title: 'Frontend', i18nKey: 'skills.cat2', icon: '🎨',
-    color: 'bg-corals text-coral',
+    color: 'bg-corals text-coral border-coral',
     skills: ['React', 'Next.js', 'Astro', 'Tailwind CSS', 'Vue', 'GSAP']
   },
   {
     title: 'Backend', i18nKey: 'skills.cat3', icon: '⚙️',
-    color: 'bg-pinklight text-hotpink',
+    color: 'bg-pinklight text-hotpink border-hotpink',
     skills: ['Node.js', 'Express', 'FastAPI', 'PostgreSQL', 'Redis', 'Docker']
   },
   {
     title: 'Tools & Practices', i18nKey: 'skills.cat4', icon: '🛠️',
-    color: 'bg-goldenlight text-golden',
+    color: 'bg-goldenlight text-golden border-golden',
     skills: ['Git', 'CI/CD', 'Testing', 'REST APIs', 'GraphQL', 'Agile']
   }
 ];
@@ -31,16 +31,16 @@ const skillCategories = [
       <p class="section-subtitle reveal reveal-delay-1" data-i18n="skills.subtitle">Technologies and tools I work with</p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-6 stagger">
+    <div class="grid md:grid-cols-2 gap-6">
       {skillCategories.map((cat, i) => (
-        <div class={`bold-card p-8 ${i === 0 ? 'bold-card' : i === 1 ? 'bold-card-coral' : i === 2 ? 'bold-card-pink' : 'bold-card-mint'}`}>
+        <div class={`reveal reveal-delay-${(i % 4) + 1} bold-card p-8 ${i === 0 ? '' : i === 1 ? 'bold-card-coral' : i === 2 ? 'bold-card-pink' : 'bold-card-mint'}`}>
           <div class="flex items-center gap-3 mb-6">
             <span class="text-3xl">{cat.icon}</span>
             <h3 class="font-display text-2xl font-black text-charcoal" data-i18n={cat.i18nKey}>{cat.title}</h3>
           </div>
           <div class="flex flex-wrap gap-3">
             {cat.skills.map(skill => (
-              <span class={`px-4 py-2 ${cat.color} rounded-full text-sm font-display font-bold border-2 border-charcoal shadow-[2px_2px_0px_#1A1A1A] hover:shadow-[4px_4px_0px_#1A1A1A] hover:-translate-y-0.5 transition-all cursor-default`}>
+              <span class={`px-4 py-2 ${cat.color} rounded-full text-sm font-display font-bold border-2 shadow-[2px_2px_0px_#1A1A1A] hover:shadow-[4px_4px_0px_#1A1A1A] hover:-translate-y-0.5 transition-all cursor-default`}>
                 {skill}
               </span>
             ))}
