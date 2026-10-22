@@ -7,10 +7,12 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-cream text-charcoal font-sans antialiased;
+    overflow-x: hidden;
   }
 
   /* Prevent fixed nav from hiding section anchors */

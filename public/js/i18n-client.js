@@ -1,4 +1,4 @@
-const translations = {
+window.translations = {
   en: {
     'nav.about': 'About', 'nav.projects': 'Work', 'nav.skills': 'Skills',
     'nav.blog': 'Blog', 'nav.timeline': 'Timeline', 'nav.gallery': 'Gallery', 'nav.contact': 'Contact',
@@ -80,8 +80,13 @@ function init() {
   if (lang !== 'en') {
     requestAnimationFrame(() => applyLang(lang));
   }
-  document.getElementById('lang-toggle')?.addEventListener('click', () => {
+  // Support both button IDs
+  const toggleBtn = document.getElementById('lang-toggle') || document.getElementById('nav-lang-toggle');
+  toggleBtn?.addEventListener('click', () => {
     setLang(getLang() === 'en' ? 'zh' : 'en');
+    // Update button label
+    const btn = document.getElementById('nav-lang-toggle');
+    if (btn) btn.textContent = getLang() === 'en' ? '中文' : 'EN';
   });
 }
 

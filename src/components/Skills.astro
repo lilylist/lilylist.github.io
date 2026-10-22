@@ -40,7 +40,7 @@ const skillCategories = [
           </div>
           <div class="flex flex-wrap gap-3">
             {cat.skills.map(skill => (
-              <span class={`px-4 py-2 ${cat.color} rounded-full text-sm font-display font-bold border-2 shadow-[2px_2px_0px_#1A1A1A] hover:shadow-[4px_4px_0px_#1A1A1A] hover:-translate-y-0.5 transition-all cursor-default`}>
+              <span class={`px-4 py-2 ${cat.color} rounded-full text-sm font-display font-bold border-2 shadow-none md:shadow-[2px_2px_0px_#1A1A1A] hover:shadow-[4px_4px_0px_#1A1A1A] hover:-translate-y-0.5 transition-all cursor-default`}>
                 {skill}
               </span>
             ))}
