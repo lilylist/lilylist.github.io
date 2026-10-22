@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+---
+
+<section id="projects" class="bg-white/50">
+  <div class="section-container">
+    <div class="text-center mb-16">
+      <h2 class="section-title reveal" data-i18n="projects.title">Projects</h2>
+      <p class="section-subtitle reveal reveal-delay-1" data-i18n="projects.subtitle">Things I've built and contributed to</p>
+    </div>
+
+    {projects.length > 0 ? (
+      <div class="grid md:grid-cols-2 gap-8">
+        {projects.map((project, i) => (
+          <article class={`reveal reveal-delay-${(i % 4) + 1} glass-card overflow-hidden group hover:shadow-xl transition-shadow`}>
+            {project.data.cover && (
+              <div class="aspect-video overflow-hidden">
+                <img src={project.data.cover} alt={project.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              </div>
+            )}
+            <div class="p-6">
+              <h3 class="font-display text-xl font-semibold text-stone-900 mb-2">{project.data.title}</h3>
+              <p class="text-warmgray text-sm mb-4">{project.data.description}</p>
+
+              {project.data.tech && (
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {project.data.tech.map(t => (
+                    <span class="px-3 py-1 bg-lavender rounded-full text-xs text-deeppurple">{t}</span>
+                  ))}
+                </div>
+              )}
+
+              <div class="flex gap-4">
+                {project.data.url && (
+                  <a href={project.data.url} target="_blank" class="text-sm text-deeppurple hover:underline" data-i18n="projects.live">Live →</a>
+                )}
+                {project.data.repo && (
+                  <a href={project.data.repo} target="_blank" class="text-sm text-warmgray hover:underline">Code</a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-16">
+        <div class="glass-card p-12 max-w-md mx-auto">
+          <div class="text-5xl mb-4">🚀</div>
+          <p class="text-warmgray" data-i18n="projects.empty">Projects will appear here once you add them via the CMS!</p>
+        </div>
+      </div>
+    )}
+  </div>
+</section>

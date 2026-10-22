@@ -1,0 +1,59 @@
+backend:
+  name: github
+  repo: lilylist/lilylist.github.io
+  branch: main
+
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Cover Image", name: "cover", widget: "image", required: false}
+      - {label: "Excerpt", name: "excerpt", widget: "text"}
+      - {label: "Tags", name: "tags", widget: "list", default: ["tech"]}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "projects"
+    label: "Projects"
+    folder: "content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Cover", name: "cover", widget: "image"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Tech Stack", name: "tech", widget: "list", default: []}
+      - {label: "Live URL", name: "url", widget: "string", required: false}
+      - {label: "Repo URL", name: "repo", widget: "string", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "timeline"
+    label: "Timeline"
+    folder: "content/timeline"
+    create: true
+    slug: "{{year}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Type", name: "type", widget: "select", options: ["work", "education", "project", "milestone"]}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Icon", name: "icon", widget: "string", default: "💼"}
+
+  - name: "gallery"
+    label: "Gallery"
+    folder: "content/gallery"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Photo", name: "photo", widget: "image"}
+      - {label: "Caption", name: "caption", widget: "string", required: false}
+      - {label: "Date", name: "date", widget: "datetime", required: false}

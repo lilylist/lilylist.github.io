@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog', ({ data }) => data.date <= new Date());
+posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<section id="blog" class="bg-white/50">
+  <div class="section-container">
+    <div class="text-center mb-16">
+      <h2 class="section-title reveal" data-i18n="blog.title">Blog</h2>
+      <p class="section-subtitle reveal reveal-delay-1" data-i18n="blog.subtitle">Thoughts, tutorials, and discoveries</p>
+    </div>
+
+    {posts.length > 0 ? (
+      <div class="grid md:grid-cols-2 gap-8">
+        {posts.slice(0, 6).map((post, i) => (
+          <article class={`reveal reveal-delay-${(i % 4) + 1} glass-card p-6 group hover:shadow-xl transition-shadow`}>
+            {post.data.cover && (
+              <div class="aspect-video rounded-xl overflow-hidden mb-4 -mx-2 -mt-2">
+                <img src={post.data.cover} alt={post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              </div>
+            )}
+            <div class="flex items-center gap-3 mb-3">
+              <time class="text-xs text-warmgray">
+                {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+              </time>
+              {post.data.tags && post.data.tags.map(tag => (
+                <span class="px-2 py-0.5 bg-lavender rounded text-xs text-deeppurple">{tag}</span>
+              ))}
+            </div>
+            <h3 class="font-display text-lg font-semibold text-stone-900 mb-2 group-hover:text-deeppurple transition-colors">
+              {post.data.title}
+            </h3>
+            <p class="text-sm text-warmgray">{post.data.excerpt}</p>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-16">
+        <div class="glass-card p-12 max-w-md mx-auto">
+          <div class="text-5xl mb-4">✍️</div>
+          <p class="text-warmgray" data-i18n="blog.empty">Blog posts will appear here. Start writing via the CMS!</p>
+        </div>
+      </div>
+    )}
+  </div>
+</section>

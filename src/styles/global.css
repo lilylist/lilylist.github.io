@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-stone-800 font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-softpurple text-deeppurple;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-5xl mx-auto px-6 py-20 md:py-28;
+  }
+
+  .section-title {
+    @apply font-display text-4xl md:text-5xl font-bold text-stone-900 mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-warmgray text-lg mb-12;
+  }
+
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-md rounded-2xl border border-white/50 shadow-lg;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-deeppurple via-purple-500 to-pink-400 bg-clip-text text-transparent;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-deeppurple text-white rounded-full font-medium hover:bg-purple-700 transition-all hover:shadow-lg hover:shadow-purple-200;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-6 py-3 border border-stone-300 rounded-full font-medium hover:border-deeppurple hover:text-deeppurple transition-all;
+  }
+
+  .dots-bg {
+    background-image: radial-gradient(circle, #E8D5F5 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

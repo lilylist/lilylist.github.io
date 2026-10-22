@@ -1,0 +1,30 @@
+---
+import Base from '@layouts/Base.astro';
+import Navbar from '@components/Navbar.astro';
+import Hero from '@components/Hero.astro';
+import About from '@components/About.astro';
+import Projects from '@components/Projects.astro';
+import Skills from '@components/Skills.astro';
+import Blog from '@components/Blog.astro';
+import Timeline from '@components/Timeline.astro';
+import Gallery from '@components/Gallery.astro';
+import Contact from '@components/Contact.astro';
+import Footer from '@components/Footer.astro';
+import LanguageToggle from '@components/LanguageToggle.astro';
+---
+
+<Base>
+  <Navbar />
+  <LanguageToggle />
+  <main>
+    <Hero />
+    <About />
+    <Projects />
+    <Skills />
+    <Blog />
+    <Timeline />
+    <Gallery />
+    <Contact />
+  </main>
+  <Footer />
+</Base>
