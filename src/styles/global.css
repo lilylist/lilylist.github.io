@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;600;700;800;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
 
 @layer base {
   html {
@@ -22,6 +22,60 @@
 
   ::selection {
     @apply bg-electric text-white;
+  }
+
+  /* Chinese typography overrides */
+  html[lang="zh-CN"] body {
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+  }
+
+  html[lang="zh-CN"] .font-display {
+    font-family: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+    line-height: 1.6;
+  }
+
+  html[lang="zh-CN"] .section-title {
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+  }
+
+  /* Remove uppercase + wide tracking for Chinese */
+  html[lang="zh-CN"] .tag-pill {
+    text-transform: none;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  html[lang="zh-CN"] .tag-pill-outline {
+    text-transform: none;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  html[lang="zh-CN"] .btn-primary {
+    text-transform: none;
+    letter-spacing: 0.05em;
+  }
+
+  html[lang="zh-CN"] .btn-outline {
+    text-transform: none;
+    letter-spacing: 0.05em;
+  }
+
+  html[lang="zh-CN"] .section-subtitle {
+    line-height: 1.8;
+  }
+
+  html[lang="zh-CN"] blockquote {
+    line-height: 2;
+    letter-spacing: 0.03em;
+  }
+
+  html[lang="zh-CN"] .marquee-track span {
+    text-transform: none;
+    letter-spacing: 0.05em;
   }
 
   /* Bold scrollbar */
