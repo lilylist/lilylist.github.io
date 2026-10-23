@@ -19,13 +19,13 @@ const navLinks = [
     </a>
 
     <!-- Desktop links -->
-    <div class="hidden lg:flex items-center gap-1">
+    <nav class="hidden lg:flex items-center gap-1" aria-label="Main navigation">
       {navLinks.map(link => (
-        <a href={link.href} class="text-[13px] font-display font-semibold text-stone hover:text-electric transition-colors px-3 py-2 rounded-lg hover:bg-electriclight uppercase tracking-wider" data-i18n={link.key}>
+        <a href={link.href} class="text-[13px] font-display font-semibold text-stone hover:text-electric transition-colors px-3 py-2 rounded-lg hover:bg-electriclight uppercase tracking-wider" data-i18n={link.key} data-nav-link>
           {link.label}
         </a>
       ))}
-    </div>
+    </nav>
 
     <!-- Right side -->
     <div class="flex items-center gap-3">
@@ -63,16 +63,43 @@ const navLinks = [
     a.addEventListener('click', () => menu?.classList.add('hidden'));
   });
 
-  // Hide/show on scroll (skip if mobile menu is open)
+  // Hide/show on scroll (throttled, skip if mobile menu is open)
   const nav = document.getElementById('main-nav');
   let lastScroll = 0;
+  let scrollTimeout;
   window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
-    if (currentScroll > 100 && currentScroll > lastScroll) {
-      nav?.classList.add('-translate-y-full');
-    } else {
-      nav?.classList.remove('-translate-y-full');
-    }
-    lastScroll = currentScroll;
-  });
+    if (scrollTimeout) return;
+    scrollTimeout = setTimeout(() => {
+      const currentScroll = window.scrollY;
+      if (!menu?.classList.contains('hidden')) { lastScroll = currentScroll; scrollTimeout = null; return; }
+      if (currentScroll > 100 && currentScroll > lastScroll) {
+        nav?.classList.add('-translate-y-full');
+      } else {
+        nav?.classList.remove('-translate-y-full');
+      }
+      lastScroll = currentScroll;
+      scrollTimeout = null;
+    }, 50);
+  }, { passive: true });
+
+  // Scroll spy — highlight active nav link
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('[data-nav-link]');
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          if (link.getAttribute('href') === `#${id}`) {
+            link.classList.add('text-electric', 'bg-electriclight');
+            link.classList.remove('text-stone');
+          } else {
+            link.classList.remove('text-electric', 'bg-electriclight');
+            link.classList.add('text-stone');
+          }
+        });
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-80px 0px -40% 0px' });
+  sections.forEach(s => spyObserver.observe(s));
 </script>

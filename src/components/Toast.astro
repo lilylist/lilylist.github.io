@@ -17,11 +17,17 @@
     const icons = { success: '✓', error: '✕', info: '→' };
 
     const toast = document.createElement('div');
-    toast.className = `${styles[type] || styles.info} border-[3px] border-charcoal shadow-[4px_4px_0px_#1A1A1A] rounded-xl px-5 py-3 flex items-center gap-3 transform translate-x-full opacity-0 transition-all duration-300 pointer-events-auto min-w-[220px]`;
+    toast.className = `${styles[type] || styles.info} border-[3px] border-charcoal shadow-[4px_4px_0px_#1A1A1A] rounded-xl px-5 py-3 flex items-center gap-3 transform translate-x-full opacity-0 transition-all duration-300 pointer-events-auto min-w-[220px] relative overflow-hidden`;
     toast.innerHTML = `<span class="text-lg font-display font-black">${icons[type] || icons.info}</span><span class="text-sm font-display font-bold">${message}</span>`;
+    const progress = document.createElement('div');
+    progress.className = 'absolute bottom-0 left-0 h-1 bg-charcoal/30 transition-all duration-[3000ms] ease-linear w-full';
+    toast.appendChild(progress);
 
     container.appendChild(toast);
-    requestAnimationFrame(() => toast.classList.remove('translate-x-full', 'opacity-0'));
+    requestAnimationFrame(() => {
+      toast.classList.remove('translate-x-full', 'opacity-0');
+      progress.style.width = '0%';
+    });
     setTimeout(() => {
       toast.classList.add('translate-x-full', 'opacity-0');
       setTimeout(() => toast.remove(), 300);

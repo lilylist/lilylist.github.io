@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lilylist.github.io/sitemap.xml

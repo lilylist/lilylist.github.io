@@ -18,15 +18,44 @@ const {
   <meta name="description" content={description} />
   <title>{title}</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Open Graph -->
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lilylist.github.io" />
+  <meta property="og:image" content="https://lilylist.github.io/og-image.png" />
+  <meta property="og:site_name" content="lilylist" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="https://lilylist.github.io/og-image.png" />
+
+  <!-- Theme color -->
+  <meta name="theme-color" content="#FAF7F2" />
+  <meta name="theme-color" content="#1A1A1A" media="(prefers-color-scheme: dark)" />
+
   <script is:inline src="/js/i18n-client.js"></script>
+
+  <!-- JSON-LD Person Schema -->
+  <script type="application/ld+json" is:inline>
+    {"@context":"https://schema.org","@type":"Person","name":"lilylist","url":"https://lilylist.github.io","jobTitle":"Computer Engineer","sameAs":["https://github.com/lilylist"]}
+  </script>
 </head>
 <body>
+  <!-- Skip to content for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <!-- Custom cursor elements -->
+  <div class="custom-cursor" id="custom-cursor" aria-hidden="true"></div>
+  <div class="custom-cursor-trail" id="custom-cursor-trail" aria-hidden="true"></div>
+
   <slot />
 
   <script>
+    // Reveal observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -35,7 +64,60 @@ const {
       });
     }, { threshold: 0.08 });
 
-    document.querySelectorAll('.reveal, .stagger').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-rotate, .stagger').forEach(el => observer.observe(el));
+
+    // Custom cursor
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      const cursor = document.getElementById('custom-cursor');
+      const trail = document.getElementById('custom-cursor-trail');
+      let mouseX = 0, mouseY = 0;
+      let cursorX = 0, cursorY = 0;
+      let trailX = 0, trailY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      document.addEventListener('mousedown', () => cursor?.classList.add('clicking'));
+      document.addEventListener('mouseup', () => cursor?.classList.remove('clicking'));
+
+      const interactiveSelector = 'a, button, [role="button"], input, [data-gallery-item], .bold-card, [onclick]';
+      document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(interactiveSelector)) cursor?.classList.add('hover');
+      });
+      document.addEventListener('mouseout', (e) => {
+        if (e.target.closest(interactiveSelector)) cursor?.classList.remove('hover');
+      });
+
+      function animateCursor() {
+        cursorX += (mouseX - cursorX) * 0.15;
+        cursorY += (mouseY - cursorY) * 0.15;
+        trailX += (mouseX - trailX) * 0.08;
+        trailY += (mouseY - trailY) * 0.08;
+        if (cursor) { cursor.style.left = cursorX + 'px'; cursor.style.top = cursorY + 'px'; }
+        if (trail) { trail.style.left = trailX + 'px'; trail.style.top = trailY + 'px'; }
+        requestAnimationFrame(animateCursor);
+      }
+      requestAnimationFrame(animateCursor);
+    }
+
+    // Parallax on scroll (throttled with rAF)
+    let ticking = false;
+    const parallaxElements = document.querySelectorAll('.parallax-element');
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          parallaxElements.forEach(el => {
+            const speed = parseFloat(el.dataset.parallaxSpeed || '0.3');
+            el.style.transform = `translateY(${scrollY * speed}px)`;
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
   </script>
 </body>
 </html>
